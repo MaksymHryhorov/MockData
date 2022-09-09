@@ -1,4 +1,4 @@
-package knubisoft;
+package knubisoft.Generator;
 
 import lombok.Getter;
 

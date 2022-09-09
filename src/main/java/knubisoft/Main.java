@@ -1,62 +1,30 @@
 package knubisoft;
 
-import lombok.SneakyThrows;
+import knubisoft.Generator.GenericClass;
+import knubisoft.Generator.MockData;
 
 import java.util.ArrayList;
-import java.util.LinkedHashMap;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.function.Supplier;
 
 public class Main {
-    static Map<Class<?>, Supplier<Object>> generator = new LinkedHashMap<>();
-    static List<String> list = new ArrayList<>();
-
-    static {
-        generator.put(Integer.class, () -> 1);
-        generator.put(Boolean.class, () -> true);
-        generator.put(String.class, () -> "Hello");
-    }
-
     public static void main(String[] args) {
-        List<String> list = new ArrayList<>();
-        Integer integer = 1;
+        Integer integer = null;
+        String str = null;
+        Character character = null;
+        Long longValue = null;
+        Boolean bool = null;
+        Float floatVal = null;
+        Double doubleVal = null;
 
-        populate(integer);
-        populate(list);
+        List<List<Integer>> list = new ArrayList<>();
+        Map<String, Integer> map = new HashMap<>();
+
+        X x = new X();
+
+        MockData mockData = new MockData(5);
+        mockData.populate(mockData.unpackGenericClass(new GenericClass<>(map) {}.getType()));
+
     }
-
-    @SneakyThrows
-    private static <T> T populate(T type) {
-        Class<T> clazz = (Class<T>) type.getClass();
-
-        if (isSimpleType(clazz)) {
-            return buildSimpleClass(clazz);
-        }
-
-        if (isCollection(clazz)) {
-            return buildCustomClass(clazz);
-        }
-
-        return null;
-    }
-
-    private static <T> T buildSimpleClass(Class<T> clazz) {
-
-        return null;
-    }
-
-    private static <T> T buildCustomClass(Class<T> clazz) {
-
-        return null;
-    }
-
-    private static boolean isCollection(Class<?> x) {
-        return List.class.isAssignableFrom(x) || Map.class.isAssignableFrom(x);
-    }
-
-    private static boolean isSimpleType(Object x) {
-        return generator.containsKey(x);
-    }
-
 }
