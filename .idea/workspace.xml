@@ -5,9 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="721eb12b-f9cd-4723-839b-93f654ed532e" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/knubisoft/GenericClass.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/knubisoft/Generator/GenericClass.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/knubisoft/Generator/MockData.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/knubisoft/Generator/MockData.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/knubisoft/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/knubisoft/Main.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -89,7 +88,9 @@
       <workItem from="1662561180915" duration="350000" />
       <workItem from="1662561797200" duration="51000" />
       <workItem from="1662642210334" duration="5428000" />
-      <workItem from="1662709668361" duration="7364000" />
+      <workItem from="1662709668361" duration="8908000" />
+      <workItem from="1663582540808" duration="418000" />
+      <workItem from="1663582966894" duration="685000" />
     </task>
     <servers />
   </component>
@@ -106,5 +107,25 @@
         </entry>
       </map>
     </option>
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/knubisoft/Main.java</url>
+          <line>24</line>
+          <option name="timeStamp" value="2" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-method">
+          <url>file://$PROJECT_DIR$/src/main/java/knubisoft/Generator/Generator.java</url>
+          <line>24</line>
+          <properties class="knubisoft.Generator.Generator" method="generateList">
+            <option name="EMULATED" value="true" />
+            <option name="WATCH_EXIT" value="false" />
+          </properties>
+          <option name="timeStamp" value="3" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>

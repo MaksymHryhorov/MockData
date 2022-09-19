@@ -2,15 +2,15 @@ package knubisoft.Generator;
 
 import lombok.SneakyThrows;
 
-import java.lang.reflect.Field;
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
 import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.function.Supplier;
 
 public class MockData {
-    private static final Map<Class<?>, Supplier<Object>> generator = new LinkedHashMap<>();
+    private static final Map<Class<?>, Supplier<Object>> classSupplierMap = new LinkedHashMap<>();
 
     private final int capacity;
 
@@ -19,41 +19,39 @@ public class MockData {
         putDataToGenerator();
     }
 
+    public MockData() {
+        capacity = 0;
+    }
+
     private void putDataToGenerator() {
         RandomValue randomValue = new RandomValue();
 
-        generator.put(Integer.class, randomValue::getRandomIntegerValue);
-        generator.put(Boolean.class, randomValue::getRandomBooleanValue);
-        generator.put(Float.class, randomValue::getRandomFloatValue);
-        generator.put(Double.class, randomValue::getRandomDoubleValue);
-        generator.put(Character.class, randomValue::getRandomCharacterValue);
-        generator.put(Long.class, randomValue::getRandomLongValue);
-        generator.put(String.class, randomValue::getRandomStringValue);
+        classSupplierMap.put(Integer.class, randomValue::getRandomIntegerValue);
+        classSupplierMap.put(Boolean.class, randomValue::getRandomBooleanValue);
+        classSupplierMap.put(Float.class, randomValue::getRandomFloatValue);
+        classSupplierMap.put(Double.class, randomValue::getRandomDoubleValue);
+        classSupplierMap.put(Character.class, randomValue::getRandomCharacterValue);
+        classSupplierMap.put(Long.class, randomValue::getRandomLongValue);
+        classSupplierMap.put(String.class, randomValue::getRandomStringValue);
     }
 
     @SneakyThrows
-    public void populate(Type type) {
-        if (type instanceof ParameterizedType) {
-            Type[] types = ((ParameterizedType) type).getActualTypeArguments();
+    public Object populate(Type type) {
+        Generator generator = new Generator();
 
-            for (Type t : types) {
-                populate(t);
+        if (type instanceof ParameterizedType parameterizedType) {
+            Type incomeRawType = parameterizedType.getRawType();
+            if (List.class.isAssignableFrom((Class<?>) incomeRawType)) {
+                return generator.generateList(parameterizedType, capacity);
             }
-
-            return;
+            if (Map.class.isAssignableFrom((Class<?>) incomeRawType)) {
+                return generator.generateMap(parameterizedType, capacity);
+            }
         }
-
         if (isSimpleType(type)) {
-            System.out.println(generator.get(type).get());
-
-            generator.get(type).get();
+            return classSupplierMap.get(type).get();
         } else {
-            Field[] fields = Class.forName(((Class<?>) type).getTypeName()).getDeclaredFields();
-
-            for (Field field : fields) {
-                populate(field.getGenericType());
-            }
-
+            return generator.generateCustomClassInstance((Class) type);
         }
 
     }
@@ -64,6 +62,6 @@ public class MockData {
     }
 
     private static boolean isSimpleType(Object x) {
-        return generator.containsKey(x);
+        return classSupplierMap.containsKey(x);
     }
 }

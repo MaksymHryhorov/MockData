@@ -21,10 +21,7 @@ public class Main {
         List<List<Integer>> list = new ArrayList<>();
         Map<String, Integer> map = new HashMap<>();
 
-        X x = new X();
-
-        MockData mockData = new MockData(5);
-        mockData.populate(mockData.unpackGenericClass(new GenericClass<>(map) {}.getType()));
-
+        MockData mockData = new MockData(3);
+        System.out.println(mockData.populate(mockData.unpackGenericClass(new GenericClass<>(map) {}.getType())));
     }
 }
