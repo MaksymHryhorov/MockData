@@ -3,6 +3,9 @@ package knubisoft.Generator;
 import java.util.List;
 import java.util.Random;
 
+/**
+ * Class for generate random values depending on the type
+ */
 public class RandomValue {
     private static final List<String> ALPHABET = List.of("a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l",
             "m", "n", "o", "p", "q", "r", "s", "t", "u", "v,", "w", "x", "y", "z");

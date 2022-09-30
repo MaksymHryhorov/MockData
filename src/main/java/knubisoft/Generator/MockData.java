@@ -23,6 +23,9 @@ public class MockData {
         capacity = 0;
     }
 
+    /**
+     * Add all types in the map with random values depending on the type
+     */
     private void putDataToGenerator() {
         RandomValue randomValue = new RandomValue();
 
@@ -35,6 +38,11 @@ public class MockData {
         classSupplierMap.put(String.class, randomValue::getRandomStringValue);
     }
 
+    /**
+     * Method that chooses which type to use
+     * @param type java type (Collection, class)
+     * @return Generated type with random values
+     */
     @SneakyThrows
     public Object populate(Type type) {
         Generator generator = new Generator();
@@ -56,11 +64,21 @@ public class MockData {
 
     }
 
+    /**
+     * Unpack generic class to get a certain type
+     * @param type java type (Collection, class)
+     * @return Actual type arguments, raw type
+     */
     public Type unpackGenericClass(Type type) {
         ParameterizedType params = (ParameterizedType) type;
         return params.getRawType().equals(GenericClass.class) ? params.getActualTypeArguments()[0] : type;
     }
 
+    /**
+     * Check is type simple?
+     * @param x (Integer, Long, String, Double, Float, Character, Boolean)
+     * @return true/false
+     */
     private static boolean isSimpleType(Object x) {
         return classSupplierMap.containsKey(x);
     }
